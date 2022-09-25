@@ -2,7 +2,8 @@ import React from "react";
 import user from "../img/user.png";
 
 const ContactCard = (props) => {
-  const { id, name, email } = props.contact;
+  const { name, email } = props.contact || "";
+  const removeContact = _ => props.deleteContact(props.contact)
   return (
     <div className="item">
         <img
@@ -16,7 +17,7 @@ const ContactCard = (props) => {
         <div >{email}</div>
       </div>
       <div className="ui right aligned header" >
-        <i className="trash alternate outline icon" style={{color:"red",cursor:"pointer"}}>  
+        <i className="trash alternate outline icon" style={{color:"red",cursor:"pointer"}} onClick={removeContact}>  
         </i>
       </div>
     </div>

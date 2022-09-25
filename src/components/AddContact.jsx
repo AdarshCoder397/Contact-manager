@@ -1,13 +1,12 @@
 import React from "react";
 
-let Arr = JSON.parse(localStorage.getItem("contacts"))
+let data = { id: new Date().getTime(), name: "", email: "" };
+
 class AddContact extends React.Component {
-  state = {
-    name: "",
-    email: "",
-  };
+  state = data;
 
   add = (e) => {
+    let Arr = JSON.parse(localStorage.getItem("contacts"));
     e.preventDefault();
     if (this.state.name === "" || this.state.email === "") {
       alert("Enter a valid value!");
@@ -15,11 +14,10 @@ class AddContact extends React.Component {
     }
     if (Arr === null) {
       Arr = [];
-    }else{
-      console.log(Arr);
+    } else {
       Arr.push(this.state);
       this.props.addContact(Arr);
-      this.setState({ name: "", email: "" });
+      this.setState({ name: "", email: "" ,id: new Date().getTime()});
     }
   };
   render() {
