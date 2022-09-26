@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./Header";
 import AddContact from "./AddContact";
 import ContactList from "./ContactList";
@@ -27,18 +28,42 @@ function App() {
     }
   }, []);
   const deleteContact = (contact) => {
-    let filtered_contacts = contacts.filter(contactItem => contactItem.id !== contact.id)
-    console.log(contact.id)
+    let filtered_contacts = contacts.filter(
+      (contactItem) => contactItem.id !== contact.id
+    );
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(filtered_contacts));
-    setContacts(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)))
+    setContacts(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)));
+  };
+  const showDetail = (contact) => {
+    return (
+      contact.id
+    )
   }
 
   return (
     <>
       <Header />
       <div className="ui container">
-        <AddContact addContact={addContact} contacts={contacts} />
-        <ContactList contacts={contacts} deleteContact={deleteContact} key={contacts.id} />
+        <Router>
+          <Routes>
+            <Route
+              path='/add'
+              element={
+                <AddContact addContact={addContact} contacts={contacts} />
+              }
+            />
+            <Route
+              exact path="/"
+              element={
+                <ContactList
+                  contacts={contacts}
+                  deleteContact={deleteContact}
+                  showDetail={showDetail}
+                />
+              }
+            />
+          </Routes>
+        </Router>
       </div>
     </>
   );

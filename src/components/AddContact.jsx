@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 let data = { id: new Date().getTime(), name: "", email: "" };
 
@@ -14,16 +15,26 @@ class AddContact extends React.Component {
     }
     if (Arr === null) {
       Arr = [];
+      Arr.push(this.state);
+      this.props.addContact(Arr);
+      this.setState({ name: "", email: "", id: new Date().getTime() });
+      alert("Contact Added!");
     } else {
       Arr.push(this.state);
       this.props.addContact(Arr);
-      this.setState({ name: "", email: "" ,id: new Date().getTime()});
+      this.setState({ name: "", email: "", id: new Date().getTime() });
+      alert("Contact Added!");
     }
   };
   render() {
     return (
       <div className="ui main">
-        <h1>Add Contact</h1>
+        <h1>
+          Add Contact
+          <Link to="/">
+            <button className="ui right floated button blue">Contact List</button>
+          </Link>
+        </h1>
         <form className="ui form" onSubmit={this.add}>
           <div className="field">
             <label>Name</label>
