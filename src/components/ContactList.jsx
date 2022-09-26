@@ -3,12 +3,11 @@ import { Link } from "react-router-dom";
 import ContactCard from "./ContactCard";
 const ContactList = (props) => {
   const DisplayContactList = props.contacts.map((contact) => {
-    console.log(props.key)
     return (
       <ContactCard
         contact={contact}
         deleteContact={props.deleteContact}
-        showDetail={props.showDetail}
+        showId={props.showId}
       />
     );
   });

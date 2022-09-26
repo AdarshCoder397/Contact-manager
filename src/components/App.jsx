@@ -34,12 +34,9 @@ function App() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(filtered_contacts));
     setContacts(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)));
   };
-  const showDetail = (contact) => {
-    return (
-      contact.id
-    )
-  }
-
+  const showId = (contact) => {
+    return contact.id;
+  };
   return (
     <>
       <Header />
@@ -47,18 +44,19 @@ function App() {
         <Router>
           <Routes>
             <Route
-              path='/add'
+              path="/add"
               element={
                 <AddContact addContact={addContact} contacts={contacts} />
               }
             />
             <Route
-              exact path="/"
+              exact
+              path="/"
               element={
                 <ContactList
                   contacts={contacts}
                   deleteContact={deleteContact}
-                  showDetail={showDetail}
+                  showId={showId}
                 />
               }
             />
